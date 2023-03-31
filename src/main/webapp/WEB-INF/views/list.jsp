@@ -111,24 +111,25 @@
 
                         </table>
 
+
+
                         <div class="float-end">
                             <ul class="pagination flex-wrap">
-                                <c:if test="${responseDTO.prev}">
+                                <c:if test="${paging.prev}">
                                     <li class="page-item">
-                                        <a class="page-link" data-num="${responseDTO.start -1}">Previous</a>
+                                        <a class="page-link" data-num="${paging.startPage -1}">Previous</a>
                                     </li>
                                 </c:if>
 
-                                <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
-                                    <li class="page-item ${responseDTO.page == num? "active":""} ">
-                                        <a class="page-link"  data-num="${num}">${num}</a></li>
+                                <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+                                    <li class="page-item ${paging.criteria.currentPage == num? "active":""} ">
+                                        <a class="page-link"  data-num="${num}">${num}</a>
+                                    </li>
                                 </c:forEach>
 
-
-
-                                <c:if test="${responseDTO.next}">
+                                <c:if test="${paging.next}">
                                     <li class="page-item">
-                                        <a class="page-link"  data-num="${responseDTO.end + 1}">Next</a>
+                                        <a class="page-link"  data-num="${paging.endPage + 1}">Next</a>
                                     </li>
                                 </c:if>
                             </ul>
@@ -165,7 +166,7 @@
 
         const formObj = document.querySelector("form")
 
-        formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+        formObj.innerHTML += `<input type='hidden' name='currentPage' value='\${num}'>`
 
         formObj.submit();
 
@@ -180,6 +181,26 @@
         self.location ='/list'
 
     },false)
+
+    // document.querySelector(".text-decoration-none").addEventListener("click", function (e){
+    //     e.preventDefault()
+    //     e.stopPropagation()
+    //
+    //     const target = e.target
+    //
+    //     let targetBno = target.getAttribute("data-tno")
+    //
+    //     const formObj = document.querySelector("form")
+    //
+    //     formObj.innerHTML += `<input type='hidden' name='bno' value='\${targetBno}'>`
+    //
+    //     formObj.submit();
+    //
+    // },false)
+
+
+
+
 
 
                         </script>

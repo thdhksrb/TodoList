@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.multicampus.myproject.jdbc.IDAO">
-    <select id="listDao" resultType="com.multicampus.myproject.jdbc.DTO">
+    <select id="listDao"  resultType="com.multicampus.myproject.jdbc.DTO">
         SELECT * FROM tbl_todo ORDER BY tno DESC
 
     </select>
@@ -23,22 +23,55 @@
     </delete>
     <select id="articleCount" resultType="_int"> <!-- 예약된 별칭은 org.apache.ibatis.type.TypeAliasRegistry 확인 -->
         SELECT COUNT(*) FROM tbl_todo
+        <if test="types == 't'.toString() and keyword!=null and keyword!=''">
+            WHERE title LIKE '%${keyword}%'
+        </if>
+        <if test="types == 'w'.toString() and keyword!=null and keyword!=''">
+            WHERE writer LIKE '%${keyword}%'
+        </if>
+        <if test="finished != null and finished == true">
+            AND finished = #{finished}
+        </if>
+        <if test="from != null and to !=null and from != '' and to !=''">
+            AND dueDate BETWEEN #{from} AND #{to}
+        </if>
     </select>
-    <select id="selectDao" resultType="com.multicampus.myproject.jdbc.DTO">
+    <select id="selectDao"  resultType="com.multicampus.myproject.jdbc.DTO">
         SELECT * FROM tbl_todo
         WHERE finished = #{finished}
           AND ${types} LIKE '%${keyword}%'
         AND dueDate BETWEEN #{from} AND #{to}
         ORDER BY tno DESC
+
     </select>
 
-    <select id="selectDao2" resultType="com.multicampus.myproject.jdbc.DTO">
+    <select id="selectDao2"  resultType="com.multicampus.myproject.jdbc.DTO">
         SELECT * FROM tbl_todo
         WHERE finished = #{finished}
           AND (title LIKE '%${keyword}%'
           OR writer LIKE '%${keyword}%')
           AND dueDate BETWEEN #{from} AND #{to}
         ORDER BY tno DESC
+
+    </select>
+
+    <select id="pageList" resultType="com.multicampus.myproject.jdbc.DTO">
+        SELECT * FROM tbl_todo
+        <if test="types == 't'.toString() and keyword!=null and keyword!=''">
+            WHERE title LIKE '%${keyword}%'
+        </if>
+        <if test="types == 'w'.toString() and keyword!=null and keyword!=''">
+            WHERE writer LIKE '%${keyword}%'
+        </if>
+        <if test="finished != null and finished == true">
+            AND finished = #{finished}
+        </if>
+        <if test="from != null and to !=null and from != '' and to !=''">
+            AND dueDate BETWEEN #{from} AND #{to}
+        </if>
+        ORDER BY tno DESC
+        LIMIT #{startNum}, #{recordsPerPage}
+
     </select>
 
 </mapper>
