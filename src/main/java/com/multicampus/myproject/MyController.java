@@ -1,23 +1,17 @@
 package com.multicampus.myproject;
 
-import com.multicampus.myproject.jdbc.DTO;
 import com.multicampus.myproject.jdbc.IDAO;
 import com.multicampus.myproject.paging.Criteria;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.multicampus.myproject.paging.PageDTO;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 @Controller
 public class MyController {

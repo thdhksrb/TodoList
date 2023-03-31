@@ -12,7 +12,6 @@ public interface IDAO {
     public DTO viewDao(String tno);
     public int writeDao(Map<String,String> map);
     public int deleteDao(String tno);
-//    public int articleCount();
     public int modifyDao(String tno,String title,String duDate, boolean finished);
     public List<DTO> selectDao(Criteria criteria);
     public List<DTO> selectDao2(Criteria criteria);
