@@ -4,10 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.multicampus.myproject.jdbc.IDAO">
-    <select id="listDao"  resultType="com.multicampus.myproject.jdbc.DTO">
-        SELECT * FROM tbl_todo ORDER BY tno DESC
-
-    </select>
     <select id="viewDao" resultType="com.multicampus.myproject.jdbc.DTO">
         SELECT * FROM tbl_todo WHERE tno = #{0}
     </select>
@@ -35,24 +31,6 @@
         <if test="from != null and to !=null and from != '' and to !=''">
             AND dueDate BETWEEN #{from} AND #{to}
         </if>
-    </select>
-    <select id="selectDao"  resultType="com.multicampus.myproject.jdbc.DTO">
-        SELECT * FROM tbl_todo
-        WHERE finished = #{finished}
-          AND ${types} LIKE '%${keyword}%'
-        AND dueDate BETWEEN #{from} AND #{to}
-        ORDER BY tno DESC
-
-    </select>
-
-    <select id="selectDao2"  resultType="com.multicampus.myproject.jdbc.DTO">
-        SELECT * FROM tbl_todo
-        WHERE finished = #{finished}
-          AND (title LIKE '%${keyword}%'
-          OR writer LIKE '%${keyword}%')
-          AND dueDate BETWEEN #{from} AND #{to}
-        ORDER BY tno DESC
-
     </select>
 
     <select id="pageList" resultType="com.multicampus.myproject.jdbc.DTO">
